@@ -1,0 +1,50 @@
+.korijen {
+    -fx-font-family: "Segoe UI", "Lato", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #FFFFFF;
+}
+
+.zaglavlje {
+    -fx-background-color: #2A3340;
+}
+
+.naslov {
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.podnaslov {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2A3340;
+}
+
+.obrazac {
+    -fx-background-color: #F6F7F6;
+}
+
+.glavni {
+    -fx-background-color: #FAA818;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.opasno {
+    -fx-background-color: #C52828;
+    -fx-text-fill: white;
+}
+
+.status {
+    -fx-text-fill: #3A72B8;
+    -fx-background-color: #F6F7F6;
+}
+
+.table-view .column-header {
+    -fx-background-color: #3A72B8;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}

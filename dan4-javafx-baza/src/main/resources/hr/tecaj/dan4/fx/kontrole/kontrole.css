@@ -1,0 +1,26 @@
+/* JavaFX CSS: svojstva imaju prefiks -fx- */
+.root {
+    -fx-font-family: "Segoe UI", "Lato", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #F6F7F6;
+}
+
+.label {
+    -fx-text-fill: #2A3340;
+}
+
+.text-field, .combo-box, .date-picker {
+    -fx-pref-width: 260px;
+}
+
+.glavni-gumb {
+    -fx-background-color: #FAA818;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 18;
+    -fx-padding: 6 18 6 18;
+}
+
+.glavni-gumb:hover {
+    -fx-background-color: #DE625E;
+}

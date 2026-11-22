@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- VIEW: izgled je opisan deklarativno u FXML-u (može se uređivati u Scene Builderu). -->
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="hr.tecaj.dan4.imenik.ImenikController"
+            prefWidth="920" prefHeight="520" styleClass="korijen">
+
+    <top>
+        <HBox spacing="12" alignment="CENTER_LEFT" styleClass="zaglavlje">
+            <padding><Insets top="14" right="16" bottom="14" left="16"/></padding>
+            <Label text="Imenik" styleClass="naslov"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="poljePretraga" promptText="Pretraži kontakte…" prefWidth="260"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TableView fx:id="tablica">
+            <columns>
+                <TableColumn fx:id="stupacIme" text="Ime" prefWidth="120"/>
+                <TableColumn fx:id="stupacPrezime" text="Prezime" prefWidth="130"/>
+                <TableColumn fx:id="stupacTelefon" text="Telefon" prefWidth="130"/>
+                <TableColumn fx:id="stupacEmail" text="E-mail" prefWidth="210"/>
+            </columns>
+            <BorderPane.margin><Insets top="12" bottom="8" left="16"/></BorderPane.margin>
+        </TableView>
+    </center>
+
+    <right>
+        <VBox spacing="8" prefWidth="270" styleClass="obrazac">
+            <padding><Insets top="12" right="16" bottom="8" left="16"/></padding>
+            <Label text="Detalji kontakta" styleClass="podnaslov"/>
+            <Label text="Ime *"/>
+            <TextField fx:id="poljeIme"/>
+            <Label text="Prezime *"/>
+            <TextField fx:id="poljePrezime"/>
+            <Label text="Telefon"/>
+            <TextField fx:id="poljeTelefon"/>
+            <Label text="E-mail"/>
+            <TextField fx:id="poljeEmail"/>
+            <HBox spacing="8">
+                <padding><Insets top="10"/></padding>
+                <Button text="Novi" onAction="#onNovi"/>
+                <Button fx:id="gumbSpremi" text="Spremi" onAction="#onSpremi"
+                        defaultButton="true" styleClass="glavni"/>
+                <Button fx:id="gumbObrisi" text="Obriši" onAction="#onObrisi" styleClass="opasno"/>
+            </HBox>
+        </VBox>
+    </right>
+
+    <bottom>
+        <Label fx:id="status" styleClass="status" maxWidth="Infinity">
+            <padding><Insets top="6" right="16" bottom="8" left="16"/></padding>
+        </Label>
+    </bottom>
+</BorderPane>

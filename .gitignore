@@ -1,0 +1,21 @@
+# Maven
+target/
+
+# IntelliJ IDEA / VS Code / Eclipse
+.idea/
+*.iml
+out/
+.vscode/
+.classpath
+.project
+.settings/
+
+# Datoteke koje demo primjeri stvaraju pri pokretanju
+izlaz/
+logs/
+*.mv.db
+*.trace.db
+
+# OS
+.DS_Store
+Thumbs.db

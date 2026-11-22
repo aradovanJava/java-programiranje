@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="hr.tecaj.dan4.vjezba.ZadaciController"
+      spacing="10" prefWidth="520" prefHeight="460">
+    <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+
+    <Label text="Moji zadaci" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+    <HBox spacing="8">
+        <TextField fx:id="poljeNaslov" promptText="Novi zadatak…" HBox.hgrow="ALWAYS"/>
+        <ComboBox fx:id="odabirPrioriteta" prefWidth="120"/>
+        <Button fx:id="gumbDodaj" text="Dodaj" onAction="#onDodaj" defaultButton="true"/>
+    </HBox>
+    <CheckBox fx:id="samoOtvoreni" text="Prikaži samo otvorene"/>
+    <ListView fx:id="popis" VBox.vgrow="ALWAYS"/>
+    <HBox spacing="8">
+        <Label fx:id="sazetak" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+        <Button text="Obriši gotove" onAction="#onObrisiGotove"/>
+    </HBox>
+</VBox>
