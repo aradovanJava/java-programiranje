@@ -1,9 +1,9 @@
 package hr.tecaj.dan2.iznimke;
 
-// region Vlastita checked iznimka
 /**
  * Provjerena (checked) iznimka: poslovna situacija koju pozivatelj MORA obraditi.
  */
+// region Vlastita checked iznimka
 public class NedovoljnoSredstavaException extends Exception {
 
     private final double trazeno;

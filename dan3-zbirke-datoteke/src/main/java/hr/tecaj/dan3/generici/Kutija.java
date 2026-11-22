@@ -2,10 +2,10 @@ package hr.tecaj.dan3.generici;
 
 import java.util.function.Function;
 
-// region Generička klasa
 /**
  * Generička klasa: T je parametar tipa koji se zadaje pri korištenju (Kutija&lt;String&gt;).
  */
+// region Generička klasa
 public class Kutija<T> {
 
     private T sadrzaj;

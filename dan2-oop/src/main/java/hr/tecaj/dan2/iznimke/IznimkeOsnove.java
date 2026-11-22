@@ -34,13 +34,19 @@ public class IznimkeOsnove {
         for (int i = 0; i < pokusi.length; i++) {
             try {
                 switch (i) {
-                    case 0 -> { String s = null; s.length(); }          // NullPointerException
-                    case 1 -> { int[] n = new int[2]; n[5] = 1; }       // ArrayIndexOutOfBounds
-                    case 2 -> { Object o = "tekst"; Integer x = (Integer) o; } // ClassCastException
-                    case 3 -> Integer.parseInt("12a");                  // NumberFormatException
-                    case 4 -> java.util.List.of(1, 2).add(3);           // UnsupportedOperation
+                    // NullPointerException
+                    case 0 -> { String s = null; s.length(); }
+                    // ArrayIndexOutOfBounds
+                    case 1 -> { int[] n = new int[2]; n[5] = 1; }
+                    // ClassCastException
+                    case 2 -> { Object o = "tekst"; Integer x = (Integer) o; }
+                    // NumberFormatException
+                    case 3 -> Integer.parseInt("12a");
+                    // UnsupportedOperation
+                    case 4 -> java.util.List.of(1, 2).add(3);
                 }
-            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) { // multi-catch
+            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+                // multi-catch
                 System.out.println("Programerska greška: " + e.getClass().getSimpleName());
             } catch (RuntimeException e) {                // općenitiji tip ide NA KRAJ
                 System.out.println("Runtime iznimka: " + e.getClass().getSimpleName());

@@ -62,7 +62,8 @@ public class KolektoriDemo {
                 .map(Zaposlenik::ime)
                 .gather(Gatherers.windowFixed(3))
                 .toList();
-        System.out.println(grupe); // [[Ana, Ivo, Maja], [Luka, Petra, Marko], [Iva, Tomislav]]
+        // [[Ana, Ivo, Maja], [Luka, Petra, Marko], [Iva, Tomislav]]
+        System.out.println(grupe);
         // endregion
     }
 }

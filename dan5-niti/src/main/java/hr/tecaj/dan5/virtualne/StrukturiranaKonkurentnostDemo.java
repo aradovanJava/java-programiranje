@@ -22,7 +22,8 @@ public class StrukturiranaKonkurentnostDemo {
             Subtask<List<String>> narudzbe = scope.fork(() -> dohvatiNarudzbe(id));
             Subtask<Integer> bodovi = scope.fork(() -> dohvatiBodove(id));
 
-            scope.join();             // čeka sve; ako jedan baci iznimku, ostali se prekidaju
+            // čeka sve; ako jedan baci iznimku, ostali se prekidaju
+            scope.join();
             return new Profil(korisnik.get(), narudzbe.get(), bodovi.get());
         }
     }

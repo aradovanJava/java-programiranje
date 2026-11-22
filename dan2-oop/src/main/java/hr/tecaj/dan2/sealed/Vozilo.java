@@ -1,10 +1,10 @@
 package hr.tecaj.dan2.sealed;
 
-// region Sealed hijerarhija
 /**
  * Zapečaćeno (sealed) sučelje: točno se zna koje ga klase smiju implementirati.
  * Kompajler zato može provjeriti da switch pokriva SVE slučajeve.
  */
+// region Sealed hijerarhija
 public sealed interface Vozilo permits Automobil, Kamion, Motocikl {
 }
 

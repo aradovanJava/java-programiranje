@@ -5,11 +5,11 @@ import hr.tecaj.dan4.imenik.model.Kontakt;
 import java.util.List;
 import java.util.Optional;
 
-// region DAO sučelje
 /**
  * DAO (Data Access Object): sučelje koje skriva KAKO se podaci spremaju.
  * Kontroler/servis ovisi samo o ovom sučelju – implementacija se može zamijeniti.
  */
+// region DAO sučelje
 public interface KontaktDao {
 
     List<Kontakt> dohvatiSve();

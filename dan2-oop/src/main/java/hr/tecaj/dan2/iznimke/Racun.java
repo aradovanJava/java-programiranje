@@ -14,10 +14,12 @@ public class Racun {
     // region throw i throws
     public void isplati(double iznos) throws NedovoljnoSredstavaException {
         if (iznos <= 0) {
-            throw new NeispravanIznosException(iznos);              // unchecked – ne mora u throws
+            // unchecked – ne mora u throws
+            throw new NeispravanIznosException(iznos);
         }
         if (iznos > stanje) {
-            throw new NedovoljnoSredstavaException(iznos, stanje);  // checked – MORA u throws
+            // checked – MORA u throws
+            throw new NedovoljnoSredstavaException(iznos, stanje);
         }
         stanje -= iznos;
     }

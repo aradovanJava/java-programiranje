@@ -24,7 +24,8 @@ public class Zaposlenik {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "[" + ime + ", plaća=" + izracunajPlacu() + "]";
+        String vrsta = getClass().getSimpleName();      // ime stvarne klase objekta
+        return vrsta + "[" + ime + ", plaća=" + izracunajPlacu() + "]";
     }
     // endregion
 }

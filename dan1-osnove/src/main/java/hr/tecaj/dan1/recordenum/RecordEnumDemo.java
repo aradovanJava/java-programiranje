@@ -31,7 +31,8 @@ public class RecordEnumDemo {
             String grupa = switch (kat) {
                 case HRANA, KNJIGE -> "snižena stopa";
                 case ELEKTRONIKA, ODJECA -> "puna stopa";
-            };                                         // nema default – kompajler zna sve slučajeve
+            // nema default – kompajler zna sve slučajeve
+            };
             System.out.println(kat + " → " + grupa);
         }
         // endregion

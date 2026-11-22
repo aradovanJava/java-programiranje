@@ -35,7 +35,8 @@ public class LambdeDemo {
         UnaryOperator<String> vikni = s -> s.toUpperCase() + "!"; // T → T
 
         System.out.println(dugacko.test("Programiranje"));        // true
-        System.out.println(dugacko.negate().and(s -> s.startsWith("J")).test("Java")); // true
+        // true
+        System.out.println(dugacko.negate().and(s -> s.startsWith("J")).test("Java"));
         System.out.println(duljina.andThen(n -> n * 2).apply("abc")); // 6
         ispis.accept(vikni.apply("lambda"));                      // > LAMBDA!
         // endregion

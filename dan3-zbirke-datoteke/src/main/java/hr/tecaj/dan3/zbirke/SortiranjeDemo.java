@@ -47,7 +47,8 @@ public class SortiranjeDemo {
         Collections.reverse(brojevi);
         Collections.shuffle(brojevi);                          // nasumični poredak
         Collections.sort(brojevi, Collections.reverseOrder());  // [9, 7, 5, 3, 3, 1]
-        List<Integer> samoCitanje = Collections.unmodifiableList(brojevi); // pogled bez izmjene
+        // pogled bez izmjene
+        List<Integer> samoCitanje = Collections.unmodifiableList(brojevi);
         // endregion
         System.out.println(brojevi + " " + samoCitanje.size());
     }

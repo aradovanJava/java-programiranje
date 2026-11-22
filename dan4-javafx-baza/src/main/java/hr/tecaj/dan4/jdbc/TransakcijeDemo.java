@@ -27,7 +27,8 @@ public class TransakcijeDemo {
     }
 
     // region Transakcija s commit i rollback
-    static void prijenos(Connection veza, String sa, String na, double iznos) throws SQLException {
+    static void prijenos(Connection veza, String sa, String na, double iznos)
+            throws SQLException {
         String sql = "UPDATE racun SET stanje = stanje + ? WHERE broj = ?";
         veza.setAutoCommit(false);                       // počinje transakcija
         try (PreparedStatement ps = veza.prepareStatement(sql)) {

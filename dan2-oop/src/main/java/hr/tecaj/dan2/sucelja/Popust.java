@@ -1,9 +1,9 @@
 package hr.tecaj.dan2.sucelja;
 
-// region Funkcijsko sučelje
 /**
  * Funkcijsko sučelje: točno jedna apstraktna metoda → može se implementirati lambdom.
  */
+// region Funkcijsko sučelje
 @FunctionalInterface
 public interface Popust {
 

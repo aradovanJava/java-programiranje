@@ -2,7 +2,6 @@ package hr.tecaj.dan2.sucelja;
 
 // region Implementacija više sučelja
 public class KarticnoPlacanje implements Placanje, Povratno {   // više sučelja!
-
     private final String brojKartice;
 
     public KarticnoPlacanje(String brojKartice) {
@@ -17,7 +16,6 @@ public class KarticnoPlacanje implements Placanje, Povratno {   // više sučelj
     }
 
     @Override public String naziv() { return "Kartica"; }
-
     @Override public double naknada(double iznos) { return iznos * 0.015; }
 
     @Override

@@ -24,7 +24,8 @@ public class PolimorfizamDemo {
 
         // region Overloading vs overriding
         Oblik o = new Krug("zeleni", 1);
-        ispisi(o);           // overloading se razrješava PRI KOMPAJLIRANJU (statički tip Oblik)
+        // overloading se razrješava PRI KOMPAJLIRANJU (statički tip Oblik)
+        ispisi(o);
         ispisi((Krug) o);    // → poziva verziju za Krug
         System.out.println(o.povrsina()); // overriding se razrješava PRI IZVOĐENJU (Krug)
         // endregion

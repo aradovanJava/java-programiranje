@@ -13,7 +13,8 @@ public abstract class Oblik {
         this.boja = boja;
     }
 
-    public abstract double povrsina();     // nema tijelo – podklase MORAJU implementirati
+    // nema tijelo – podklase MORAJU implementirati
+    public abstract double povrsina();
     public abstract double opseg();
 
     // "Template method": konkretna metoda koja koristi apstraktne korake

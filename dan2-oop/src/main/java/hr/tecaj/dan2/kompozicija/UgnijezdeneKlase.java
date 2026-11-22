@@ -7,7 +7,7 @@ public class UgnijezdeneKlase {
 
     private final String naziv = "Vanjska";
 
-    // region Vrste ugniježđenih klasa
+    // region Static nested i inner klasa
     // 1) static nested – ne treba objekt vanjske klase
     static class Konfiguracija {
         int timeout = 30;
@@ -19,7 +19,9 @@ public class UgnijezdeneKlase {
             System.out.println("Inner klasa vidi: " + naziv);
         }
     }
+    // endregion
 
+    // region Lokalna i anonimna klasa
     void pokreni() {
         // 3) lokalna klasa – definirana unutar metode
         class Brojac {

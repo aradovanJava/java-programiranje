@@ -48,7 +48,8 @@ public class DeadlockDemo {
     // endregion
 
     // region Rješenje 2: ReentrantLock.tryLock
-    static boolean prijenosTryLock(Racun sa, Racun na, double iznos) throws InterruptedException {
+    static boolean prijenosTryLock(Racun sa, Racun na, double iznos)
+            throws InterruptedException {
         if (sa.brava.tryLock(100, TimeUnit.MILLISECONDS)) {
             try {
                 if (na.brava.tryLock(100, TimeUnit.MILLISECONDS)) {
@@ -57,14 +58,14 @@ public class DeadlockDemo {
                         na.stanje += iznos;
                         return true;
                     } finally {
-                        na.brava.unlock();          // otključavanje UVIJEK u finally
+                        na.brava.unlock();      // otključavanje UVIJEK u finally
                     }
                 }
             } finally {
                 sa.brava.unlock();
             }
         }
-        return false;                               // odustani i pokušaj kasnije
+        return false;                   // odustani i pokušaj kasnije
     }
     // endregion
 

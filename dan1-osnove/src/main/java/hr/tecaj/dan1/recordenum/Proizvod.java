@@ -1,10 +1,10 @@
 package hr.tecaj.dan1.recordenum;
 
-// region Record s validacijom
 /**
  * Record: nepromjenjivi nositelj podataka. Kompajler automatski generira
  * konstruktor, pristupne metode (naziv(), cijena()...), equals, hashCode i toString.
  */
+// region Record s validacijom
 public record Proizvod(String sifra, String naziv, double cijena, Kategorija kategorija) {
 
     // kompaktni konstruktor – validacija prije dodjele polja

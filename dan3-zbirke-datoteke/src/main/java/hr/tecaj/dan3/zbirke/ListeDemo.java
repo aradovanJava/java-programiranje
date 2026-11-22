@@ -58,7 +58,8 @@ public class ListeDemo {
         povijest.addLast("stranica1");
         povijest.addLast("stranica2");
         povijest.addFirst("početna");
-        System.out.println(povijest.removeFirst() + " " + povijest); // početna [stranica1, stranica2]
+        // početna [stranica1, stranica2]
+        System.out.println(povijest.removeFirst() + " " + povijest);
         // endregion
     }
 }

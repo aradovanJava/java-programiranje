@@ -42,7 +42,8 @@ public class RaceConditionDemo {
         NesigurniBrojac nesigurni = new NesigurniBrojac();
         SinkroniziraniBrojac sinkronizirani = new SinkroniziraniBrojac();
         // region Rješenja 2 i 3: atomarne klase
-        AtomicInteger atomarni = new AtomicInteger();   // compare-and-swap, bez zaključavanja
+        // compare-and-swap, bez zaključavanja
+        AtomicInteger atomarni = new AtomicInteger();
         LongAdder zbrajalo = new LongAdder();           // najbrži kod puno niti koje pišu
         // endregion
 

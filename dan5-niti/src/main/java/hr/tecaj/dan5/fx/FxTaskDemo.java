@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -29,9 +30,11 @@ public class FxTaskDemo extends Application {
     @Override
     public void start(Stage stage) {
         ProgressBar traka = new ProgressBar(0);
-        traka.setPrefWidth(320);
+        traka.setMaxWidth(Double.MAX_VALUE);           // traka zauzima cijelu širinu
         Label status = new Label("Spremno");
         ListView<String> rezultati = new ListView<>();
+        rezultati.setPrefHeight(200);                  // lista ne "istiskuje" traku napretka
+        VBox.setVgrow(rezultati, Priority.ALWAYS);
         Button pokreni = new Button("Obradi datoteke");
         Button odustani = new Button("Odustani");
         odustani.setDisable(true);
@@ -40,7 +43,7 @@ public class FxTaskDemo extends Application {
             // region Task u pozadini
             Task<List<String>> obrada = new Task<>() {
                 @Override
-                protected List<String> call() throws Exception {   // izvodi se u POZADINSKOJ niti
+                protected List<String> call() throws Exception { // POZADINSKA nit
                     List<String> gotovo = new ArrayList<>();
                     int ukupno = 20;
                     for (int i = 1; i <= ukupno; i++) {
@@ -53,13 +56,17 @@ public class FxTaskDemo extends Application {
                     return gotovo;
                 }
             };
+            // endregion
+            // region Povezivanje Taska sa sučeljem
             traka.progressProperty().bind(obrada.progressProperty());   // binding na Task
             status.textProperty().bind(obrada.messageProperty());
             pokreni.disableProperty().bind(obrada.runningProperty());
             odustani.disableProperty().bind(obrada.runningProperty().not());
 
-            obrada.setOnSucceeded(ev -> rezultati.getItems().setAll(obrada.getValue())); // na FX niti
-            obrada.setOnFailed(ev -> rezultati.getItems().setAll("Greška: " + obrada.getException()));
+            // ovi se rukovatelji izvode na JavaFX niti
+            obrada.setOnSucceeded(ev -> rezultati.getItems().setAll(obrada.getValue()));
+            obrada.setOnFailed(ev -> rezultati.getItems()
+                    .setAll("Greška: " + obrada.getException().getMessage()));
             odustani.setOnAction(ev -> obrada.cancel());
 
             pozadina.submit(obrada);                               // pokreni u pozadini
@@ -68,8 +75,10 @@ public class FxTaskDemo extends Application {
 
         // region Platform.runLater
         Thread.ofVirtual().start(() -> {
-            String poruka = "Pozadinska nit javlja: veza na bazu OK";   // posao izvan FX niti
-            Platform.runLater(() -> stage.setTitle(poruka));           // izmjena UI-ja NA FX niti
+            // posao izvan FX niti
+            String poruka = "Pozadinska nit javlja: veza na bazu OK";
+            // izmjena UI-ja NA FX niti
+            Platform.runLater(() -> stage.setTitle(poruka));
         });
         // endregion
 

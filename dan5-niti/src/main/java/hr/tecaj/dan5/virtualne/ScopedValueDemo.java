@@ -20,7 +20,7 @@ public class ScopedValueDemo {
     }
 
     static void obradiZahtjev() {
-        provjeriPrava();                   // ne treba prosljeđivati korisnika kao parametar
+        provjeriPrava();          // korisnik se NE prosljeđuje parametrom
         System.out.println("Obrađen zahtjev za: " + KORISNIK.get());
     }
 

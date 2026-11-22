@@ -24,7 +24,8 @@ public class JsonOsnoveDemo {
 
     public static void main(String[] args) throws IOException {
         // region Serijalizacija i deserijalizacija
-        ObjectMapper mapper = new ObjectMapper();   // jedan mapper, koristi se ponovno (thread-safe)
+        // jedan mapper, koristi se ponovno (thread-safe)
+        ObjectMapper mapper = new ObjectMapper();
 
         Polaznik ana = new Polaznik("Ana Horvat", "ana@primjer.hr", 87, true,
                 List.of("Java", "SQL"), new Adresa("Ilica 1", "Zagreb", "10000"));

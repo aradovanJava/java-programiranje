@@ -40,7 +40,8 @@ public class BindingDemo extends Application {
         unos2.textProperty().bindBidirectional(ime);            // polju mijenja oba
 
         Button pozdravi = new Button("Pozdravi");
-        pozdravi.disableProperty().bind(ime.isEmpty());         // gumb neaktivan dok je prazno
+        // gumb neaktivan dok je prazno
+        pozdravi.disableProperty().bind(ime.isEmpty());
         Label pozdrav = new Label();
         pozdravi.setOnAction(e -> pozdrav.setText("Bok, " + ime.get() + "!"));
         // endregion

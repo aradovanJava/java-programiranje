@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -39,20 +40,22 @@ public class CsvDemo {
     // region Učitavanje CSV-a
     public static List<Proizvod> ucitaj(String resurs) {
         List<Proizvod> proizvodi = new ArrayList<>();
-        InputStream ulaz = CsvDemo.class.getResourceAsStream(resurs); // iz src/main/resources
-        if (ulaz == null) throw new IllegalArgumentException("Nema resursa " + resurs);
+        // resurs se čita s classpatha (src/main/resources)
+        InputStream ulaz = CsvDemo.class.getResourceAsStream(resurs);
+        Objects.requireNonNull(ulaz, "Nema resursa " + resurs);
 
         try (BufferedReader r = new BufferedReader(
                 new InputStreamReader(ulaz, StandardCharsets.UTF_8))) {
-            String redak = r.readLine();                  // preskoči zaglavlje
+            String redak = r.readLine();      // preskoči zaglavlje
             int broj = 1;
             while ((redak = r.readLine()) != null) {
                 broj++;
                 if (redak.isBlank()) continue;
                 try {
                     proizvodi.add(Proizvod.izCsv(redak));
-                } catch (RuntimeException e) {            // loš redak ne ruši cijeli uvoz
-                    System.err.println("Preskačem redak " + broj + ": " + e.getMessage());
+                } catch (RuntimeException e) {
+                    // loš redak ne ruši cijeli uvoz
+                    System.err.println("Redak " + broj + ": " + e.getMessage());
                 }
             }
         } catch (IOException e) {
@@ -67,7 +70,7 @@ public class CsvDemo {
         System.out.println("Učitano proizvoda: " + proizvodi.size());
 
         // region Obrada i izvještaj
-        Map<String, Double> vrijednostPoKategoriji = proizvodi.stream()
+        Map<String, Double> poKategoriji = proizvodi.stream()
                 .collect(Collectors.groupingBy(Proizvod::kategorija, TreeMap::new,
                         Collectors.summingDouble(Proizvod::vrijednost)));
 
@@ -77,11 +80,11 @@ public class CsvDemo {
                 .toList();
 
         StringBuilder izvjestaj = new StringBuilder("IZVJEŠTAJ O ZALIHAMA\n\n");
-        vrijednostPoKategoriji.forEach((k, v) ->
+        poKategoriji.forEach((k, v) ->
                 izvjestaj.append("%-12s %12.2f EUR%n".formatted(k, v)));
         izvjestaj.append("\nZa naručiti (< 5 kom):\n");
-        zaNarudzbu.forEach(p ->
-                izvjestaj.append("  %s %-22s %d kom%n".formatted(p.sifra(), p.naziv(), p.kolicina())));
+        zaNarudzbu.forEach(p -> izvjestaj.append("  %s %-22s %d kom%n"
+                .formatted(p.sifra(), p.naziv(), p.kolicina())));
 
         Path izlaz = Path.of("izlaz", "izvjestaj-zalihe.txt");
         Files.createDirectories(izlaz.getParent());

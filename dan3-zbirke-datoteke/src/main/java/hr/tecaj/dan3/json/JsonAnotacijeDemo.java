@@ -20,7 +20,8 @@ public class JsonAnotacijeDemo {
 
     // region Anotacije
     @JsonInclude(JsonInclude.Include.NON_NULL)        // ne zapisuj null polja
-    @JsonIgnoreProperties(ignoreUnknown = true)        // ignoriraj nepoznata polja u ulazu
+    // ignoriraj nepoznata polja u ulazu
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public record Korisnik(
             @JsonProperty("korisnicko_ime") String korisnickoIme,  // drugo ime u JSON-u
             String email,
@@ -55,7 +56,8 @@ public class JsonAnotacijeDemo {
         for (JsonNode dan : korijen.get("prognoza")) {
             System.out.println(dan.get("dan").asText() + ": " + dan.get("max").asInt() + " °C");
         }
-        String nema = korijen.path("vjetar").path("brzina").asText("n/a"); // path() ne baca NPE
+        // path() ne baca NPE
+        String nema = korijen.path("vjetar").path("brzina").asText("n/a");
 
         ObjectNode novi = mapper.createObjectNode();       // gradnja JSON-a ručno
         novi.put("tecaj", "Java").put("trenutnaTemp", temp);
@@ -66,11 +68,13 @@ public class JsonAnotacijeDemo {
 
         // region Datumi s JavaTimeModule
         ObjectMapper vremenski = new ObjectMapper()
-                .findAndRegisterModules()                  // pronalazi jackson-datatype-jsr310
+                // pronalazi jackson-datatype-jsr310
+                .findAndRegisterModules()
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         String t = vremenski.writeValueAsString(new Termin("Ispit", LocalDate.of(2026, 12, 18)));
-        System.out.println(t);                             // {"naziv":"Ispit","datum":"2026-12-18"}
+        // {"naziv":"Ispit","datum":"2026-12-18"}
+        System.out.println(t);
         Termin natrag = vremenski.readValue(t, Termin.class);
         // endregion
         System.out.println(natrag.datum().getDayOfWeek());

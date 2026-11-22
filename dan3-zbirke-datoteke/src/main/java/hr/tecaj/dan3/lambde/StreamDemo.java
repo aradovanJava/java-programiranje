@@ -67,7 +67,8 @@ public class StreamDemo {
         List<Integer> kvadrati = Stream.iterate(1, n -> n + 1)
                 .map(n -> n * n)
                 .limit(5)
-                .toList();                                                 // [1, 4, 9, 16, 25]
+                // [1, 4, 9, 16, 25]
+                .toList();
         // endregion
         System.out.println(zbroj + " " + umnozak + " " + inicijali + " " + kvadrati);
     }

@@ -30,7 +30,8 @@ public class PostavkeDemo {
             ucitane.load(r);
         }
         String tema = ucitane.getProperty("ui.tema");
-        int velicinaPoola = Integer.parseInt(ucitane.getProperty("pool.velicina", "4")); // zadano
+        // zadano
+        int velicinaPoola = Integer.parseInt(ucitane.getProperty("pool.velicina", "4"));
         // endregion
         System.out.println("Tema: " + tema + ", veličina poola: " + velicinaPoola);
         System.out.println(Files.readString(datoteka));

@@ -33,7 +33,8 @@ public class JdbcKontaktDao implements KontaktDao {
     // region Dohvat svih kontakata
     @Override
     public List<Kontakt> dohvatiSve() {
-        String sql = "SELECT id, ime, prezime, telefon, email FROM kontakt ORDER BY prezime, ime";
+        String sql = "SELECT id, ime, prezime, telefon, email "
+                   + "FROM kontakt ORDER BY prezime, ime";
         try (Connection veza = baza.spoji();
              PreparedStatement ps = veza.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -47,9 +48,11 @@ public class JdbcKontaktDao implements KontaktDao {
         }
     }
 
-    private static Kontakt mapiraj(ResultSet rs) throws SQLException {   // redak → objekt
-        return new Kontakt(rs.getLong("id"), rs.getString("ime"), rs.getString("prezime"),
-                rs.getString("telefon"), rs.getString("email"));
+    // jedan redak ResultSeta → jedan objekt
+    private static Kontakt mapiraj(ResultSet rs) throws SQLException {
+        return new Kontakt(rs.getLong("id"), rs.getString("ime"),
+                rs.getString("prezime"), rs.getString("telefon"),
+                rs.getString("email"));
     }
     // endregion
 
@@ -71,20 +74,21 @@ public class JdbcKontaktDao implements KontaktDao {
     public Kontakt spremi(Kontakt k) {
         boolean novi = k.getId() == 0;
         String sql = novi
-                ? "INSERT INTO kontakt (ime, prezime, telefon, email) VALUES (?, ?, ?, ?)"
-                : "UPDATE kontakt SET ime = ?, prezime = ?, telefon = ?, email = ? WHERE id = ?";
+                ? "INSERT INTO kontakt (ime, prezime, telefon, email) "
+                  + "VALUES (?, ?, ?, ?)"
+                : "UPDATE kontakt SET ime = ?, prezime = ?, telefon = ?, "
+                  + "email = ? WHERE id = ?";
         try (Connection veza = baza.spoji();
-             PreparedStatement ps = veza.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement ps = veza.prepareStatement(sql,
+                     Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, k.getIme());
             ps.setString(2, k.getPrezime());
             ps.setString(3, k.getTelefon());
             ps.setString(4, k.getEmail());
             if (!novi) ps.setLong(5, k.getId());
             ps.executeUpdate();
-            if (novi) {
-                try (ResultSet kljuc = ps.getGeneratedKeys()) {
-                    if (kljuc.next()) k.setId(kljuc.getLong(1));
-                }
+            try (ResultSet kljuc = ps.getGeneratedKeys()) {
+                if (novi && kljuc.next()) k.setId(kljuc.getLong(1));
             }
             return k;
         } catch (SQLException e) {

@@ -40,7 +40,8 @@ public class MapeDemo {
         for (String rijec : tekst.split(" ")) {
             frekvencije.merge(rijec, 1, Integer::sum);         // dodaj 1 ili postavi 1
         }
-        System.out.println(frekvencije); // {java=3, je=3, jezik=1, platforma=1, zajednica=1}
+        // {java=3, je=3, jezik=1, platforma=1, zajednica=1}
+        System.out.println(frekvencije);
         // endregion
 
         // region Grupiranje s computeIfAbsent
@@ -56,7 +57,8 @@ public class MapeDemo {
         Map<String, String> glavniGradovi = Map.of(
                 "HR", "Zagreb", "SI", "Ljubljana", "AT", "Beč");
         TreeMap<String, String> sortirano = new TreeMap<>(glavniGradovi);
-        System.out.println(sortirano.firstKey() + " " + sortirano.lastEntry()); // AT SI=Ljubljana
+        // AT SI=Ljubljana
+        System.out.println(sortirano.firstKey() + " " + sortirano.lastEntry());
         // endregion
     }
 }

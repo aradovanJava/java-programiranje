@@ -33,21 +33,21 @@ public class KonkurentneZbirkeDemo {
                         for (String r : rijeci) {
                             sigurna.merge(r, 1, Integer::sum);     // atomarno
                             try {
-                                obicna.merge(r, 1, Integer::sum);  // utrka – gubi zapise ili puca
+                                obicna.merge(r, 1, Integer::sum);  // utrka!
                             } catch (RuntimeException e) {
                                 greske.increment();
                             }
                         }
                     } finally {
-                        gotovo.countDown();                         // jedan posao manje – UVIJEK
+                        gotovo.countDown();          // jedan posao manje – UVIJEK
                     }
                 });
             }
-            gotovo.await();                                         // čekaj da brojač dođe do 0
+            gotovo.await();                      // čekaj da brojač dođe do 0
         }
+        // endregion
         System.out.println("ConcurrentHashMap: " + new TreeMap<>(sigurna));
         System.out.println("HashMap (možda krivo): " + obicna + ", iznimki: " + greske.sum());
-        // endregion
 
         // region CopyOnWriteArrayList
         // Idealna za "puno čitanja, malo pisanja" – npr. popis slušača događaja
@@ -56,7 +56,8 @@ public class KonkurentneZbirkeDemo {
         slusaci.add(() -> System.out.println("Slušač 2 obaviješten"));
         for (Runnable s : slusaci) {
             s.run();
-            slusaci.add(() -> { });   // izmjena tijekom iteracije – BEZ ConcurrentModificationException
+            // izmjena tijekom iteracije – BEZ ConcurrentModificationException
+            slusaci.add(() -> { });
         }
         System.out.println("Broj slušača: " + slusaci.size());
         // endregion

@@ -43,7 +43,8 @@ public class LogiranjeDemo {
         // endregion
 
         // region MDC kontekst
-        MDC.put("zahtjev", "REQ-7781");          // kontekst se dodaje svakoj poruci (%X{zahtjev})
+        // kontekst se dodaje svakoj poruci (%X{zahtjev})
+        MDC.put("zahtjev", "REQ-7781");
         try {
             log.info("Obrada narudžbe započeta");
             log.info("Obrada narudžbe završena");

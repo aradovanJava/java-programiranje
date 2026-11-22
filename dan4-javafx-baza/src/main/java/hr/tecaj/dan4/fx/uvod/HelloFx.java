@@ -17,8 +17,10 @@ public class HelloFx extends Application {
     // region Prva JavaFX aplikacija
     private int brojKlikova = 0;
 
+    // stage = prozor koji dobijemo od platforme
+
     @Override
-    public void start(Stage stage) {                  // stage = prozor koji dobijemo od platforme
+    public void start(Stage stage) {
         Label poruka = new Label("Pozdrav iz JavaFX-a!");
         Button gumb = new Button("Klikni me");
         gumb.setOnAction(e -> {                       // obrada događaja lambdom
@@ -37,13 +39,16 @@ public class HelloFx extends Application {
     // endregion
 
     // region Životni ciklus aplikacije
+    // 1. prije start(), NIJE na JavaFX niti – bez rada s UI-jem
     @Override
-    public void init() {          // 1. prije start(), NIJE na JavaFX niti – bez rada s UI-jem
+    public void init() {
         System.out.println("init() – učitavanje postavki");
     }
 
+    // 3. pri zatvaranju aplikacije – spremanje, zatvaranje resursa
+
     @Override
-    public void stop() {          // 3. pri zatvaranju aplikacije – spremanje, zatvaranje resursa
+    public void stop() {
         System.out.println("stop() – aplikacija se zatvara");
     }
     // endregion

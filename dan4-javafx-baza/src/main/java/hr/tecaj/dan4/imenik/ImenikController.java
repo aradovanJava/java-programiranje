@@ -2,6 +2,7 @@ package hr.tecaj.dan4.imenik;
 
 import hr.tecaj.dan4.imenik.model.Kontakt;
 import hr.tecaj.dan4.imenik.servis.KontaktServis;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -44,8 +45,8 @@ public class ImenikController {
     }
 
     // region initialize – povezivanje
-    @FXML
-    private void initialize() {                         // poziva se nakon učitavanja FXML-a
+    @FXML  // poziva se automatski nakon učitavanja FXML-a
+    private void initialize() {
         stupacIme.setCellValueFactory(c -> c.getValue().imeProperty());
         stupacPrezime.setCellValueFactory(c -> c.getValue().prezimeProperty());
         stupacTelefon.setCellValueFactory(c -> c.getValue().telefonProperty());
@@ -55,20 +56,21 @@ public class ImenikController {
         poljePretraga.textProperty().addListener(
                 (obs, staro, novo) -> filtrirani.setPredicate(k -> k.sadrzi(novo)));
         SortedList<Kontakt> sortirani = new SortedList<>(filtrirani);
-        sortirani.comparatorProperty().bind(tablica.comparatorProperty());  // klik na zaglavlje
+        // sortiranje klikom na zaglavlje stupca
+        sortirani.comparatorProperty().bind(tablica.comparatorProperty());
         tablica.setItems(sortirani);
 
         tablica.getSelectionModel().selectedItemProperty()
                .addListener((obs, stari, novi) -> prikazi(novi));
         gumbObrisi.disableProperty().bind(
                 tablica.getSelectionModel().selectedItemProperty().isNull());
-        gumbSpremi.disableProperty().bind(
-                poljeIme.textProperty().isEmpty().or(poljePrezime.textProperty().isEmpty()));
+        BooleanBinding nepotpuno = poljeIme.textProperty().isEmpty()
+                .or(poljePrezime.textProperty().isEmpty());
+        gumbSpremi.disableProperty().bind(nepotpuno);
         osvjezi();
     }
     // endregion
 
-    // region Akcije gumba
     @FXML
     private void onNovi() {
         tablica.getSelectionModel().clearSelection();
@@ -76,10 +78,12 @@ public class ImenikController {
         poljeIme.requestFocus();
     }
 
+    // region Akcija spremanja
     @FXML
     private void onSpremi() {
         Kontakt odabrani = tablica.getSelectionModel().getSelectedItem();
-        Kontakt k = odabrani != null ? odabrani : new Kontakt(0, null, null, null, null);
+        Kontakt k = (odabrani != null) ? odabrani
+                                       : new Kontakt(0, null, null, null, null);
         k.setIme(poljeIme.getText().strip());
         k.setPrezime(poljePrezime.getText().strip());
         k.setTelefon(poljeTelefon.getText().strip());
@@ -91,10 +95,13 @@ public class ImenikController {
         } catch (KontaktServis.ValidacijaException e) {
             new Alert(Alert.AlertType.WARNING, e.getMessage()).showAndWait();
         } catch (RuntimeException e) {
-            new Alert(Alert.AlertType.ERROR, "Greška pri spremanju: " + e.getMessage()).showAndWait();
+            String poruka = "Greška pri spremanju: " + e.getMessage();
+            new Alert(Alert.AlertType.ERROR, poruka).showAndWait();
         }
     }
+    // endregion
 
+    // region Brisanje s potvrdom
     @FXML
     private void onObrisi() {
         Kontakt k = tablica.getSelectionModel().getSelectedItem();

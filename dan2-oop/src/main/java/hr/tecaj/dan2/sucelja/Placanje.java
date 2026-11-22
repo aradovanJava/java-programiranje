@@ -11,7 +11,8 @@ public interface Placanje {
     boolean plati(double iznos);            // implicitno public abstract
     String naziv();
 
-    default double naknada(double iznos) {  // default: implementacija koju se može nadjačati
+    // default: implementacija koju se može nadjačati
+    default double naknada(double iznos) {
         return 0;
     }
 
@@ -20,7 +21,8 @@ public interface Placanje {
                 naziv(), iznos, naknada(iznos));
     }
 
-    static boolean jeIspravanIznos(double iznos) {   // static: poziva se Placanje.jeIspravanIznos(...)
+    // static: poziva se Placanje.jeIspravanIznos(...)
+    static boolean jeIspravanIznos(double iznos) {
         return iznos > 0 && iznos <= MAX_IZNOS;
     }
     // endregion

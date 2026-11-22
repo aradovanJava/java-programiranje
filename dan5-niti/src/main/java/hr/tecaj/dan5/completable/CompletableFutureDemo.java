@@ -17,23 +17,27 @@ public class CompletableFutureDemo {
         // region Lanac asinkronih koraka
         CompletableFuture<String> pozdrav = CompletableFuture
                 .supplyAsync(() -> dohvatiKorisnika(7))           // u pozadinskoj niti
-                .thenApply(Korisnik::ime)                         // transformacija rezultata
+                // transformacija rezultata
+                .thenApply(Korisnik::ime)
                 .thenApply(ime -> "Dobro došla, " + ime + "!");
-        System.out.println(pozdrav.join());                       // join = get bez checked iznimki
+        // join = get bez checked iznimki
+        System.out.println(pozdrav.join());
         // endregion
 
         // region Kombiniranje i paralelno čekanje
         CompletableFuture<Korisnik> korisnik = CompletableFuture.supplyAsync(() -> dohvatiKorisnika(3));
         CompletableFuture<Ponuda> ponuda = CompletableFuture.supplyAsync(() -> dohvatiPonudu("Laptop"));
 
-        CompletableFuture<String> poruka = korisnik.thenCombine(ponuda,       // oba rezultata
+        // oba rezultata
+        CompletableFuture<String> poruka = korisnik.thenCombine(ponuda,
                 (k, p) -> "%s, %s je danas %.2f EUR".formatted(k.ime(), p.artikl(), p.cijena()));
         System.out.println(poruka.join());
 
         List<CompletableFuture<Ponuda>> trgovine = List.of("Miš", "Tipkovnica", "Monitor").stream()
                 .map(a -> CompletableFuture.supplyAsync(() -> dohvatiPonudu(a)))
                 .toList();
-        CompletableFuture.allOf(trgovine.toArray(CompletableFuture[]::new)).join(); // čekaj sve
+        // čekaj sve
+        CompletableFuture.allOf(trgovine.toArray(CompletableFuture[]::new)).join();
         trgovine.forEach(cf -> System.out.println("  " + cf.join()));
         // endregion
 

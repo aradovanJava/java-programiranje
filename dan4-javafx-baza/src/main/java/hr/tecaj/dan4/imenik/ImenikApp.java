@@ -25,13 +25,14 @@ public class ImenikApp extends Application {
 
     private static final Logger log = LoggerFactory.getLogger(ImenikApp.class);
 
-    // region Sastavljanje aplikacije
+    // region Učitavanje FXML-a i DI
     @Override
     public void start(Stage stage) throws IOException {
         KontaktServis servis = new KontaktServis(odaberiDao());
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("imenik-view.fxml"));
-        loader.setControllerFactory(tip -> new ImenikController(servis)); // DI u kontroler
+        // DI u kontroler
+        loader.setControllerFactory(tip -> new ImenikController(servis));
         Parent korijen = loader.load();
 
         Scene scena = new Scene(korijen);
@@ -41,7 +42,9 @@ public class ImenikApp extends Application {
         stage.setScene(scena);
         stage.show();
     }
+    // endregion
 
+    // region Odabir DAO implementacije
     private KontaktDao odaberiDao() {
         if ("memorija".equals(System.getProperty("imenik.dao"))) {
             log.info("Koristim memorijski DAO");

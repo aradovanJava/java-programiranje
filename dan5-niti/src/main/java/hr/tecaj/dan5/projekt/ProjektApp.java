@@ -21,7 +21,8 @@ public class ProjektApp {
     public static void main(String[] args) throws Exception {
         // region Tijek završnog projekta
         // 1) priprema podataka
-        List<Path> datoteke = GeneratorLogova.generiraj(Path.of("izlaz", "logovi"), 12, 20_000);
+        Path mapa = Path.of("izlaz", "logovi");
+        List<Path> datoteke = GeneratorLogova.generiraj(mapa, 12, 20_000);
         log.info("Generirano {} log datoteka", datoteke.size());
 
         // 2) paralelna analiza (virtualne niti)

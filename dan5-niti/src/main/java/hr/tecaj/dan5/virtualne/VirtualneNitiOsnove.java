@@ -19,7 +19,8 @@ public class VirtualneNitiOsnove {
         Thread v2 = Thread.startVirtualThread(            // najkraći način
                 () -> System.out.println("isVirtual = " + Thread.currentThread().isVirtual()));
 
-        Thread.Builder graditelj = Thread.ofVirtual().name("radnik-", 0);  // radnik-0, radnik-1...
+        // radnik-0, radnik-1...
+        Thread.Builder graditelj = Thread.ofVirtual().name("radnik-", 0);
         Thread v3 = graditelj.start(() -> System.out.println(Thread.currentThread().getName()));
 
         v1.join();

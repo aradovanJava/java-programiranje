@@ -24,7 +24,7 @@ public class ExecutorDemo {
         };
         Future<Integer> buduci = pool.submit(zbroj);               // odmah vraća Future
         System.out.println("Zadatak predan, radimo nešto drugo...");
-        Integer rezultat = buduci.get();                           // blokira dok rezultat ne stigne
+        Integer rezultat = buduci.get();          // blokira dok rezultat ne stigne
         System.out.println("Rezultat: " + rezultat);
 
         pool.shutdown();                                           // ne prima nove zadatke
@@ -38,12 +38,13 @@ public class ExecutorDemo {
                 () -> provjeri("disk", 150),
                 () -> provjeri("mreža", 250));
 
-        try (ExecutorService ex = Executors.newFixedThreadPool(3)) {  // Java 19+: AutoCloseable
+        // Java 19+: ExecutorService je AutoCloseable
+        try (ExecutorService ex = Executors.newFixedThreadPool(3)) {
             List<Future<String>> rezultati = ex.invokeAll(provjere); // čeka SVE zadatke
             for (Future<String> f : rezultati) {
                 System.out.println(f.get());
             }
-        }                                                             // close() = shutdown + čekanje
+        }   // close() = shutdown + čekanje na završetak
         // endregion
 
         // region Vremensko ograničenje i iznimke

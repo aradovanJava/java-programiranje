@@ -9,7 +9,8 @@ public class BankovniRacun {
     // region Enkapsulacija
     private final String iban;
     private final String vlasnik;
-    private double stanje;               // nema settera – izvana se ne može "podmetnuti"
+    // nema settera – izvana se ne može "podmetnuti"
+    private double stanje;
 
     public BankovniRacun(String iban, String vlasnik) {
         this.iban = iban;

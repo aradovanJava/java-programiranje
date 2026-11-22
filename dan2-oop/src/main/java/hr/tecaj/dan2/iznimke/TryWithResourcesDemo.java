@@ -38,7 +38,8 @@ public class TryWithResourcesDemo {
             b.upit("");                          // baca iznimku...
         } catch (IllegalStateException e) {
             System.out.println("Uhvaćeno: " + e.getMessage());
-        }                                        // ...ali B i A su ipak zatvoreni (obrnutim redom)
+        // ...ali B i A su ipak zatvoreni (obrnutim redom)
+        }
         // endregion
 
         // region Čitanje teksta s try-with-resources

@@ -13,7 +13,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SemaforDemo {
 
     // region Ograničavanje semaforom
-    private static final Semaphore DOZVOLE = new Semaphore(10);   // najviše 10 istovremeno
+    // najviše 10 istovremenih poziva
+    private static final Semaphore DOZVOLE = new Semaphore(10);
     private static final AtomicInteger trenutno = new AtomicInteger();
     private static final AtomicInteger maksimum = new AtomicInteger();
 

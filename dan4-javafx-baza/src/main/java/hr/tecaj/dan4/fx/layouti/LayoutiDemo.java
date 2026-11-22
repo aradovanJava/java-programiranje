@@ -85,7 +85,8 @@ public class LayoutiDemo extends Application {
     }
 
     private FlowPane oznake() {
-        FlowPane tok = new FlowPane(6, 6);              // prelama u novi red kad nema mjesta
+        // prelama u novi red kad nema mjesta
+        FlowPane tok = new FlowPane(6, 6);
         tok.setPadding(new Insets(10));
         for (String o : new String[]{"#java", "#javafx", "#mvc", "#fxml", "#css", "#jdbc"}) {
             tok.getChildren().add(new Button(o));

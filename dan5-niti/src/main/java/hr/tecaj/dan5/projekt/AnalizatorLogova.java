@@ -47,10 +47,11 @@ public class AnalizatorLogova {
     private final AtomicLong najsporiji = new AtomicLong();
     // endregion
 
-    // region Jedna virtualna nit po datoteci
+    // region Pokretanje virtualnih niti
     public Statistika analiziraj(List<Path> datoteke) throws InterruptedException {
         List<Future<Long>> rezultati = new ArrayList<>();
-        ThreadFactory tvornica = Thread.ofVirtual().name("analiza-", 1).factory(); // imena u logu
+        // virtualne niti s imenima analiza-1, analiza-2… (vidljiva u logu)
+        ThreadFactory tvornica = Thread.ofVirtual().name("analiza-", 1).factory();
         try (ExecutorService ex = Executors.newThreadPerTaskExecutor(tvornica)) {
             for (Path p : datoteke) {
                 rezultati.add(ex.submit(() -> obradiDatoteku(p)));
@@ -65,7 +66,9 @@ public class AnalizatorLogova {
         }
         return sazmi(datoteke.size());
     }
+    // endregion
 
+    // region Obrada jedne datoteke
     private long obradiDatoteku(Path datoteka) {
         long n = 0;
         try (Stream<String> retci = Files.lines(datoteka)) {
@@ -75,7 +78,8 @@ public class AnalizatorLogova {
                     n++;
                 } catch (RuntimeException e) {
                     neispravnih.increment();
-                    log.debug("{}: preskačem redak ({})", datoteka.getFileName(), e.getMessage());
+                    log.debug("{}: preskačem redak – {}",
+                            datoteka.getFileName(), e.getMessage());
                 }
             }
         } catch (IOException e) {

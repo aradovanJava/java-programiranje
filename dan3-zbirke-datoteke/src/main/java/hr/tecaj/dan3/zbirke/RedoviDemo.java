@@ -45,7 +45,8 @@ public class RedoviDemo {
         hitno.add(new Zadatak("Popraviti pad produkcije", 1));
         hitno.add(new Zadatak("Code review", 2));
         while (!hitno.isEmpty()) {
-            System.out.println(hitno.poll());    // izlaze po prioritetu, ne po redu dodavanja
+            // izlaze po prioritetu, ne po redu dodavanja
+            System.out.println(hitno.poll());
         }
         // endregion
     }

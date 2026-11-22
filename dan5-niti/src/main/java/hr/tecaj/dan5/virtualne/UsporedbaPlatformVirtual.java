@@ -16,7 +16,8 @@ public class UsporedbaPlatformVirtual {
     // region Mjerenje
     static long izmjeri(ExecutorService executor) {
         long start = System.nanoTime();
-        try (executor) {                                       // Java 9+: postojeća varijabla u try
+        // Java 9+: postojeća varijabla u try
+        try (executor) {
             IntStream.range(0, ZADATAKA).forEach(i -> executor.submit(() -> {
                 Thread.sleep(CEKANJE);                         // nit "čeka I/O"
                 return i;
@@ -30,8 +31,10 @@ public class UsporedbaPlatformVirtual {
         long virtualne = izmjeri(Executors.newVirtualThreadPerTaskExecutor());
 
         System.out.printf("%d zadataka × %d ms čekanja%n", ZADATAKA, CEKANJE.toMillis());
-        System.out.printf("Bazen od 100 platformskih niti: %5d ms%n", platformske); // ≈ 4000 ms
-        System.out.printf("Virtualne niti (jedna po zadatku): %5d ms%n", virtualne); // ≈ 200–400 ms
+        // ≈ 4000 ms
+        System.out.printf("Bazen od 100 platformskih niti: %5d ms%n", platformske);
+        // ≈ 200–400 ms
+        System.out.printf("Virtualne niti (jedna po zadatku): %5d ms%n", virtualne);
     }
     // endregion
 }

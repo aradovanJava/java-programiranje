@@ -1,9 +1,9 @@
 package hr.tecaj.dan1.recordenum;
 
-// region Enum s poljima
 /**
  * Enum: tip s fiksnim skupom konstanti. Može imati polja, konstruktor i metode.
  */
+// region Enum s poljima
 public enum Kategorija {
     HRANA("Hrana", 0.05),
     KNJIGE("Knjige", 0.05),

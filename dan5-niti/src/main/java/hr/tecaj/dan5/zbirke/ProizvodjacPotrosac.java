@@ -8,9 +8,9 @@ import java.util.concurrent.BlockingQueue;
  */
 public class ProizvodjacPotrosac {
 
-    // region Proizvođač i potrošač
+    // region Proizvođač
     record Narudzba(int broj) { }
-    static final Narudzba KRAJ = new Narudzba(-1);          // "otrovna pilula" za završetak
+    static final Narudzba KRAJ = new Narudzba(-1);   // "otrovna pilula" = kraj
 
     public static void main(String[] args) throws InterruptedException {
         BlockingQueue<Narudzba> red = new ArrayBlockingQueue<>(3);   // kapacitet 3
@@ -19,7 +19,7 @@ public class ProizvodjacPotrosac {
             try {
                 for (int i = 1; i <= 8; i++) {
                     red.put(new Narudzba(i));               // blokira ako je red pun
-                    System.out.println("→ zaprimljena " + i + "  (u redu: " + red.size() + ")");
+                    System.out.println("→ zaprimljena " + i + " (u redu " + red.size() + ")");
                 }
                 red.put(KRAJ);
             } catch (InterruptedException e) {
@@ -27,6 +27,8 @@ public class ProizvodjacPotrosac {
             }
         });
 
+        // endregion
+        // region Potrošač
         Thread potrosac = new Thread(() -> {
             try {
                 while (true) {
@@ -45,6 +47,6 @@ public class ProizvodjacPotrosac {
         proizvodjac.join();
         potrosac.join();
         System.out.println("Sve narudžbe obrađene");
+        // endregion
     }
-    // endregion
 }

@@ -1,4 +1,5 @@
--- Shema za aplikaciju Imenik (H2). Izvodi se pri svakom pokretanju, zato IF NOT EXISTS.
+-- Shema za aplikaciju Imenik (H2).
+-- Izvodi se pri svakom pokretanju, zato IF NOT EXISTS.
 CREATE TABLE IF NOT EXISTS kontakt (
     id       BIGINT AUTO_INCREMENT PRIMARY KEY,
     ime      VARCHAR(60)  NOT NULL,
